@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "CSS Change Tracker",
+  "version": "1.0",
+  "description": "Tracks CSS changes made in DevTools and generates a snippet.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "icons": {
+    "16": "public/icons/icon16.png",
+    "48": "public/icons/icon48.png",
+    "128": "public/icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "public/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["public/content-forwarder.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "devtools_page": "dist/src/devtools/devtools.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["public/tracker-injected.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
